@@ -54,3 +54,52 @@ GROUP BY JopTitle
 
 SELECT *
 FROM #Temp_employee
+
+--Use Update and Delete
+SELECT *
+FROM SQLTutorial.dbo.EmployeeDemographics
+
+UPDATE SQLTutorial.dbo.EmployeeDemographics
+SET Gender = 'Female', age = 31
+WHERE EmployeeID = 1012
+
+
+SELECT *
+FROM SQLTutorial.dbo.EmployeeDemographics
+
+UPDATE SQLTutorial.dbo.EmployeeDemographics
+SET EmployeeID = 1012
+WHERE FirstName = 'Holy'  AND LastName = 'Flax'
+
+DELETE FROM SQLTutorial.dbo.EmployeeDemographics
+WHERE EmployeeID = 1005
+
+
+--CASE
+SELECT FirstName, LastName, JopTitle, Salary,
+CASE 
+	WHEN JopTitle = 'Salesman' THEN Salary + (Salary * .10)
+	WHEN JopTitle = 'Accountant' THEN Salary + (Salary * .05)
+	WHEN JopTitle = 'HR' THEN Salary +(Salary * .000001)
+	ELSE Salary + (Salary * .03)
+END AS SalaryAfterRaise
+FROM SQLTutorial.dbo.EmployeeDemographics
+JOIN SQLTutorial.dbo.EmployeeSalary
+	ON EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+
+--Upper and Lower
+SELECT FirstName, UPPER(FirstName)
+FROM SQLTutorial.dbo.EmployeeDemographics
+
+SELECT FirstName, LOWER(FirstName)
+FROM SQLTutorial.dbo.EmployeeDemographics
+
+
+--Replace
+SELECT LastName, REPLACE(LastName, 'Palmer', 'Palm') AS LastNameFixed
+FROM SQLTutorial.dbo.EmployeeDemographics
+
+--Trim
+SELECT FirstName, TRIM(FirstName) AS FirstNameTrimed
+From SQLTutorial.dbo.EmployeeDemographics
